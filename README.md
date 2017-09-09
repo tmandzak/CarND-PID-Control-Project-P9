@@ -3,6 +3,42 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+
+## Reflection
+
+After the PID Control solution is implemented the next step is to tune it's parameters so that the vehicle is able to drive successfully around the track. In this part I'm going to describe my experience with tuning these parameters.
+
+* Speed and Throttle
+
+First I set the ultimate speed to 10 mph. Changing the speed will demand to retune other parameters.
+Throttle was set to 0.3 for actual speed less then 10 mph and 0 otherwise. This way the speed was kept around 10 mph during the whole run.
+
+* Proportional (P) component
+
+This component looked to be the most influencial at start of the track, so it was the first to be tuned through it's Kd parameter. Other components were set to be 0. Among values tested (1, 0.5, 0.2, 0.1) Kp = 0.1 led to the most satisfactory movement along the stright part of the track. Decreasing Kp let to decrease the amplitude of the vehicle movement along the center line, but still the vehicle got out of the track at the first turn. I decided to approach this by tuning the differential component.
+
+* Differential (D) component
+
+The next step was to tune Differential component through it's Kd parameter. Keeping Kp = 0.1 and setting Kd = 0.1 did just enough:
+the vehicle was able to treat turns well and to drive around the track not leaving the drivable portion of the surface. 
+Along the way average squared CTE was calculated at each step (as in the lesson's example of Twiddle process). For step 800
+it was equal 1.08 and I decided to try imroving on it by tuning Integral component.
+
+* Integral (I) component
+
+The next step was to tune Integral component through it's Ki parameter. Keeping Kp = 0.1 and Kd = 0.1 I tested following values of 
+Ki: 0.1, 0.01, 0.001, 0.0001 and 0.00005. First two values led the vehicle off trackby increasing the amplitude. 
+Values 0.001, 0.0001 and 0.00005 led to the following values of average squared CTE at step 800 correspondingly: 1.30, 0.96, 1.00.
+
+* Final set of parameters
+
+For ultimate Speed = 10 mph taking into account considerations above Kp = 0.1, Ki = 0.0001, Kd = 0.1. 
+
+* Opportunities for improvement
+
+1. The set of parameters above can be treated as an input for automated Twiddle process that would lead to a better average squared CTE.
+2. Additional PID controller can be implemented for Throttle so that speed has more constant value along the way.
+
 ## Dependencies
 
 * cmake >= 3.5
