@@ -38,6 +38,7 @@ For ultimate Speed = 10 mph taking into account considerations above Kp = 0.1, K
 
 1. The set of parameters above can be treated as an input for automated Twiddle process that would lead to a better average squared CTE.
 2. Additional PID controller can be implemented for Throttle so that speed has more constant value along the way.
+3. Investigate tuning process for higher speed values.
 
 ## Dependencies
 
