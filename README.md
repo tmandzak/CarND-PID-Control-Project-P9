@@ -11,7 +11,7 @@ After the PID Control solution is implemented the next step is to tune it's para
 * Speed and Throttle
 
 First I set the ultimate speed to 10 mph. Changing the speed will demand to retune other parameters.
-Throttle was set to 0.3 for actual speed less then 10 mph and 0 otherwise. This way the speed was kept around 10 mph during the whole run.
+Throttle was set to 0.3 for actual speed less then 10 mph and 0 otherwise. This way the speed was kept around 10 mph after it was reached.
 
 * Proportional (P) component
 
